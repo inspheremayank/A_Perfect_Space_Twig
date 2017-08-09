@@ -1,35 +1,46 @@
-{% set network = _Network.getNetworkData() %}
+{% set networkData = _Network.getNetworkData() %}
+{% set blogData = _Blog.getBlog() %}
 {{ this.beginPage() }}
 <!doctype html>
 <html class="no-js">
-<!-- Begin Global Header -->
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{this.title|raw}}</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- Begin Global Header -->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{{this.title|raw}}</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <!-- Favicons and Device related Images
-    ================================================== -->
-    <link rel="shortcut icon" href="favicon/favicon.png" />
-    <link rel="icon" href="favicon/favicon.svg" sizes="any" type="image/svg+xml" />
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="favicon/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicon/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon/apple-touch-icon-144x144.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- Favicons and Device related Images
+        ================================================== -->
 
-    <!-- Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="{{_AppHelper.getAssetsStaticPath()}}/css/vendor.css" />
-    <link type="text/css" rel="stylesheet" href="{{_AppHelper.getAssetsStaticPath()}}/css/default.css" media="screen" />
+        {% set favicon = ''%}
+        {% if networkData.favMedia | length > 0 %}
+            {% set favicon = _Media.getMediaUrl(networkData.favMedia, 80, 80)%}
+        {% endif %}
 
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/respond.min.js?v=1.1.0"></script>
-    <script type="text/javascript" src="{{_AppHelper.getAssetsStaticPath()}}/dist/vendors/html5.js?v=3.7.0"></script>
-    <![endif]-->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> 
-</head>
+        {% if favicon != '' %}
+            <link rel="shortcut icon" href="{{favicon}}" />
+            <link rel="icon" href="{{favicon}}" sizes="any" type="image/svg+xml" />
+        {% endif %}
+        <!-- Stylesheet -->
+        {% if _AppHelper.getApplicationEnv() == 'PROD'%}
+            <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1500117686780" type="text/css" media="all">
+        {% else %}
+            <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/vendors.css" />
+            <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/default.css" media="screen" />
+        {% endif %}
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> 
+    </head>
 
-<!-- //End Global Header -->
-<body>
+    <!-- //End Global Header -->
+    <body class="body {{bodyClass}}">
+        {{ this.beginBody() }}
+        
+        {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
+        
+        {{ this.render('partials/_footer.twig', {network : networkData, blogData: blogData}) | raw }}
+        {{ this.endBody() }}
+    </body>
+</html>
+{{ this.endPage() }}

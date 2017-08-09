@@ -1,6 +1,29 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        sass: {// Task
+            dist: {// Target
+                options: {// Target options
+                    style: 'compressed'
+                },
+                files: {// Dictionary of files
+                    'static/css/default.css': 'static/css/sass/default.scss',
+                    'static/css/vendors.css': 'static/css/sass/vendors.scss'
+                }
+            }
+        },
+        watch: {
+            css: {
+                files: [
+                    'static/css/sass/**/*.scss'
+                ],
+                tasks: ['sass'],
+                options: {
+                    spawn: false,
+                    livereload: true
+                }
+            }
+        },
         //Minify JS
         uglify: {
             options: {
@@ -9,19 +32,14 @@ module.exports = function(grunt) {
             theme: {
                 files: {
                     'static/deploy/theme.min.js': [
-                        'static/js/index.js',
-                        'static/js/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js',
-                        'static/js/plugins/jquery.validate/jquery.validate.min.js',
-                        'static/js/dropzone/dropzone.min.js',
-                        'static/js/plugins/bootstrap/js/bootstrap.min.js',
-                        'static/js/plugins/jquery.noty-2.3.8/js/noty/packaged/jquery.noty.packaged.min.js',
-                        'static/js/plugins/jquery.fancybox/source/jquery.fancybox.js',
-                        'static/js/plugins/waypoint/lib/jquery.waypoints.min.js',
-                        'static/js/jquery.simplemodal.js',
-                        'static/js/zoom.js',
-                        'static/js/handlebars-v4.0.5.js',
-                        'static/js/plugins/bootstrap-modalmanager.js',
-                        'static/js/plugins/bootstrap-modal.js',
+                        'static/plugins/bootstrap-4.0.0-alpha/js/bootstrap.min.js',
+                        'static/plugins/fancybox/js/jquery.fancybox.js',
+                        'static/plugins/jquery/js/jquery.min.js',
+                        'static/plugins/jquery.nicescroll/js/jquery.nicescroll.min.js',
+                        'static/plugins/owl-carousel/js/owl.carousel.min.js',
+                        'static/plugins/html5.js',
+                        'static/plugins/jquery-migrate-1.2.1.min.js',
+                        'static/plugins/respond.min.js',
                         'static/dev/js/_article-templates.js',
                         'static/dev/js/home.js',
                         'static/dev/js/user-articles.js',
@@ -38,7 +56,7 @@ module.exports = function(grunt) {
         cachebreaker: {
             theme: {
                 options: {
-                    match: ['theme.min.js', 'output.min.css', 'contentbox-breakup.css']
+                    match: ['theme.min.js', 'output.min.css']
                 },
                 files: {
                     src: [
@@ -57,14 +75,8 @@ module.exports = function(grunt) {
             theme: {
                 files: {
                     'static/deploy/output.min.css' : [
-                        'static/js/plugins/jquery.fancybox/source/jquery.fancybox.css',
-                        'static/js/plugins/jquery.noty-2.3.8/demo/animate.css',
-                        '../../static/sdk/js/media-player/mediaelementplayer.css',
-                        'static/css/index.css'
-                    ],
-                    'static/deploy/print.min.css': [
-                        'static/css/bootstrap-print.css',
-                        'static/css/bootstrap-print-md.css'
+                        'static/css/default.css',
+                        'static/css/vendors.css'
                     ]
                 }
             }
@@ -75,6 +87,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-cache-breaker');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     
     // Default task(s).
     grunt.registerTask('default', ['uglify', 'cssmin', 'cachebreaker']);
