@@ -1,0 +1,24 @@
+/* articles section
+================================ */
+.button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    min-height: 36px;
+    border: 1px solid $transparent;
+    &-block {
+        width: $viewportSize;
+    }
+    &-rounded {
+        @include border-radius(25px);
+    }
+    &-radius {
+        @include border-radius(4px); 
+    }
+    &-grey {
+        background: $black none repeat scroll 0 0;
+        color: $white;
+        border-color: $black;
+    }
+}

@@ -1,0 +1,82 @@
+/* Global classes
+================================ */
+.upper { 
+    text-transform: uppercase; 
+}
+.fullwidth { 
+    width: $viewportSize !important;
+}
+.green-color {
+    color: $green;
+}
+.white {
+    &__bg {
+        background: $white !important;
+    }
+    &__color {
+        color: $white !important;
+    }
+}
+.red {
+    &__bg {
+        background: $red !important;
+    }
+    &__color {
+        color: $red !important;
+    }
+}
+.badge, .label {
+    &-success {
+        background: $success none repeat scroll 0 0;
+    }
+    &-danger {
+        background: $error none repeat scroll 0 0;
+    }
+    &-warning {
+        background: $warning none repeat scroll 0 0;
+    }
+    &-info {
+        background: $info none repeat scroll 0 0;
+    }
+}
+.image-covered {
+    @include background-size(cover);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.mob__fullwidth {
+    @media #{$media-phone} { 
+        width: $viewportSize;
+    }
+    &-599 {
+        @media #{$media-tablet} {
+            width: $viewportSize;
+        }
+    }
+}
+.page__body {
+    @include padding(120px 0 80px);
+}
+.section {
+    &__head {
+        @include padding(15px 0);
+         h1 {
+             @include font-size(45);
+             font-weight: $weightBold;
+         }
+         h2 {
+             @include font-size(35); 
+             font-weight: $weightBold;
+         }
+         &.no-lineHeight {
+             h1, h2 {
+                 line-height: 1 !important;
+             }
+         }
+    }
+}
+.channels {
+    &__1 {
+        background: $defaultbg none repeat scroll 0 0;
+    }
+}

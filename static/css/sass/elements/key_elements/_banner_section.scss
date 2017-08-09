@@ -1,0 +1,180 @@
+/* Banner section
+================================ */
+.banner {
+    &__section {
+        &-image {
+            img {
+                height: 850px;
+                object-fit: cover;
+                @media #{$media-ipadPortrait} {
+                    height: 750px;
+                }
+                @media #{$media-ipadSmall} {
+                    height: inherit;
+                }
+            }
+            .owl-dots {
+                position: absolute;
+                bottom: 25px;
+                width: $viewportSize;
+                .owl-dot {
+                    span {
+                        background: $transparent;
+                        border: 2px solid $white;
+                        @include size(15px);
+                        @include border-radius(50%);
+                    }
+                    &.active, &:hover, &:focus {
+                        span {
+                            background: $white none repeat scroll 0 0;
+                        }
+                    }
+                }
+            }
+            .item img + .caption { 
+                position: absolute;
+                bottom: 80px;
+                width: 80%;
+                left: 50%;
+                @include translate(-50%,0);
+                text-align: center;
+                color: $white;
+                height: 25px;
+                overflow: hidden;
+            }
+        }
+        &-content {
+            background: $defaultbg none repeat scroll 0 0;
+            .top-section {
+                display: flex;
+                flex-direction: column;
+                height: 500px;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                @media #{$media-ipadPortrait} {
+                    height: 400px;
+                }
+                h3 {
+                    max-width: 500px;
+                    width: $viewportSize;
+                    color: $white;
+                    @include font-size(75);
+                    font-weight: $weightBold;
+                    line-height: 1;
+                    overflow: hidden;
+                    @include padding-bottom(10px);
+                    @media #{$media-ipadPortrait} {
+                        max-width: 330px;
+                        @include font-size(50);
+                        line-height: 1;
+                    }
+                }
+                .search-section {
+                    max-width: 475px;
+                    width: $viewportSize;
+                    @include padding-top(50px);
+                    @media #{$media-ipadPortrait} {
+                        max-width: 320px; 
+                    }
+                    @media #{$media-ipadSmall} {
+                        max-width: 350px;
+                        @include padding(50px 15px 0);
+                    }
+                    .input-group {
+                        position: relative;
+                        label {
+                            position: absolute;
+                            @include font-size(25);
+                            font-weight: $weightLight;
+                            line-height: 1;
+                            top: 50%;
+                            @include translate(0, -50%);
+                            @include transition(all 0.3s ease-out);
+                            color: #e3eee7;
+                            @media #{$media-ipadSmall} {
+                                @include font-size(20);
+                                line-height: 1;
+                            }
+                        }
+                        input {
+                            width: $viewportSize;
+                            border: none;
+                            border-bottom: 1px solid $white;
+                            background: none;
+                            height: 50px;
+                        }
+                        button {
+                            position: absolute;
+                            right: 0;
+                            border: none;
+                            outline: none;
+                            background: none;
+                            top: 50%;
+                            @include translate(0, -50%);
+                            cursor: pointer;
+                            i {
+                                color: $white;
+                                line-height: 1;
+                                @include font-size(22);
+                            }
+                        }
+                        &.active {
+                            label {
+                                top: -20px;
+                                @include translate(0, 0%);
+                                @include font-size(16);
+                            }
+                        }
+                    } 
+                }
+            }
+            .bottom-section {
+                background: $white none repeat scroll 0 0;
+                height: 350px; 
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                &-content {
+                    max-width: 500px;
+                    @media #{$media-ipadPortrait} {
+                        max-width: 330px;
+                    }
+                    h3 {
+                        @include font-size(35);
+                        line-height: 1.2;
+                        font-weight: $weightLight;
+                        max-height: 85px;
+                        margin-bottom: 15px;
+                        overflow: hidden; 
+                        @media #{$media-ipadPortrait} {
+                            @include font-size(30);
+                            line-height: 1.2;
+                        }
+                    }
+                    p {
+                        max-height: 120px;
+                        @include font-size(20);
+                        overflow: hidden;
+                        @media #{$media-ipadPortrait} {
+                            @include font-size(18);
+                            max-height: 110px;
+                        }                        
+                    }
+                    .button {
+                        background: $baseColor none repeat scroll 0 0;
+                        color: $white;
+                        @include font-size(18);
+                        line-height: 1;
+                        font-weight: $weightBold;
+                        @include padding(18px);
+                        display: block;
+                        width: 300px;
+                        @include border-radius(4px);
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

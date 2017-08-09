@@ -1,0 +1,88 @@
+/* cards section
+================================ */
+.card {
+    &__view {
+        &-content {
+            //min-height: 375px;
+            position: relative;
+            margin-bottom: 25px;
+            a {
+                display: block;
+            }
+            .favorite {
+                position: absolute;
+                right: 0;
+                top: 0;
+                @include size(50px);
+                @include border-radius(0 4px 4px 4px);
+                text-align: center;
+                i {
+                    color: $white;
+                    @include font-size(20);
+                    line-height: 50px;
+                }
+                &:hover, &:focus {
+                    background: $defaultbg none repeat scroll 0 0;
+                }
+            }
+            figure {
+                height: 250px;
+                @include border-radius(4px);
+                margin-bottom: 15px;
+            }
+            h3 {
+                max-height: 50px;
+                @include font-size(18);
+                font-weight: $weightBold;
+                text-transform: uppercase;
+                margin-bottom: 5px;
+                overflow: hidden;
+            }
+            p {
+                max-height: 55px;
+                @include font-size(18);
+                font-weight: $weightLight;
+                overflow: hidden;
+                margin-bottom: 0px;
+            }
+            &.active {
+                .favorite {
+                    background: darken($defaultbg, 8%) none repeat scroll 0 0;
+                }
+            }
+        }
+        &.styles {
+            .card__view-content {
+                text-align: center;
+                //min-height: 330px;
+                border: 1px solid $border2;
+                @include border-radius(4px);
+                .favorite, p {
+                    display: none;
+                }
+                figure {
+                    margin-bottom: 0px;
+                }
+                h3 {
+                    color: $white;
+                    max-height: inherit;
+                    height: 78px;
+                    margin-bottom: 0px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                figure {
+                    @include border-radius(0px);
+                }
+            }
+            &__2 {
+                .card__view-content {
+                    &[class*=" channels__"] {
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+}
