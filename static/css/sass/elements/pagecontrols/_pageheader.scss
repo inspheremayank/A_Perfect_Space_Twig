@@ -53,10 +53,11 @@
                                 
                                 li {
                                     width: $viewportSize;
+                                    color: $black;
+                                    @include font-size(14);
                                     a {
                                         @include padding(8px 15px);
                                         display: flex;
-                                        color: $black;
                                         justify-content: space-between;
                                         align-items: center;
                                     }
@@ -89,7 +90,7 @@
                                     visibility: visible; 
                                     @include opacity(1);
                                     li {
-                                        a:hover {
+                                        &:hover {
                                             color: $defaultbg;
                                         }
                                     }
