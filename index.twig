@@ -101,7 +101,7 @@
                     {% set articles = _Article.getAll({"blogId": blog.id}) %}
                     
                     {% if articles | length > 0 %}
-                        <div class="card__view styles__2">
+                        <div class="card__view">
                             <div class="section__head d-flex no-lineHeight">
                                 <h2 class="fullwidth">{{blog.title}}- {{articles | length}}</h2>
                                 <span class="d-flex fullwidth justify-content-end align-self-end section__head-rightAlign"><a href="javascript:;">See all</a></span>
@@ -109,7 +109,7 @@
                             <div class="row">
                                 {% for i in 1..4 %}
                                     {% if articles[i] is defined %}
-                                        {{this.render('partials/_single-article.twig', {article: articles[i], 'position': i+1, containerClass: 'col-12 col-md-6 col-lg-3'}) | raw}}            
+                                        {{this.render('partials/_single-article.twig', {article: articles[i], 'position': i+1, containerClass: 'col-12 col-md-6 col-lg-3 styles__2'}) | raw}}            
                                     {% endif %}
                                 {% endfor %}
                             </div>

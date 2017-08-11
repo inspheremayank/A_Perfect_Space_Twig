@@ -36,8 +36,11 @@ $('.responsive-standalone li.dropdown').on('click', function() {
 /* card favourite toggle class */
 /**********************************/
 
-$(".card__view-content .favorite").on('click', function() {
+$(".card__view-content .favorite").on('click', function(event) {
+    event.stopPropagation();
+    event.preventDefault();
     $(this).parents('.card__view-content').toggleClass('active');
+    
 });
 
 $(".search-section input").on('focus', function() {

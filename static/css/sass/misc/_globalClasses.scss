@@ -80,6 +80,18 @@
 }
 .channels {
     &__1 {
-        background: $defaultbg none repeat scroll 0 0;
+        background: $blue none repeat scroll 0 0;
+    }
+    &__2 {
+        background: $green none repeat scroll 0 0;
+    }
+    &__3 {
+        background: $brown none repeat scroll 0 0;
+    }
+    &__4 {
+        background: $grey none repeat scroll 0 0;
+    }
+    &__5 {
+        background: $black none repeat scroll 0 0; 
     }
 }

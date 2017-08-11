@@ -51,7 +51,7 @@
                 }
             }
         }
-        &.styles {
+        .styles {
             .card__view-content {
                 text-align: center;
                 //min-height: 330px;
@@ -80,6 +80,24 @@
                 .card__view-content {
                     &[class*=" channels__"] {
                         background: none;
+                    }
+                }
+            }
+        }
+        .no-image {  
+            .card__view-content {
+                @include padding-top(30px);
+                figure {
+                    display: none;
+                }
+                .favorite {
+                    i {
+                        color: $green;
+                    }
+                    &:hover, &:focus {
+                        i {
+                            color: $white;
+                        }
                     }
                 }
             }
