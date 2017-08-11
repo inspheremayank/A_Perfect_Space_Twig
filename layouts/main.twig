@@ -1,5 +1,6 @@
-{% set networkData = _Network.getNetworkData() %}
-{% set blogData = _Blog.getBlog() %}
+{% set network = _Network.getNetworkData() %}
+
+{% set blog = _Blog.getBlog() %}
 {{ this.beginPage() }}
 <!doctype html>
 <html class="no-js">
@@ -12,12 +13,9 @@
         <title>{{this.title | raw}}</title>
         {{ Html.csrfMetaTags | raw }}
 
-        <!-- Favicons and Device related Images
-        ================================================== -->
-
         {% set favicon = ''%}
-        {% if networkData.favMedia | length > 0 %}
-            {% set favicon = _Media.getMediaUrl(networkData.favMedia, 80, 80)%}
+        {% if network.favMedia | length > 0 %}
+            {% set favicon = _Media.getMediaUrl(network.favMedia, 80, 80)%}
         {% endif %}
 
         {% if favicon != '' %}
@@ -26,29 +24,31 @@
         {% endif %}
         <!-- Stylesheet -->
         {% if _AppHelper.getApplicationEnv() == 'PROD'%}
-            <link rel="stylesheet" href="{{networkData.templatePath}}/static/deploy/output.min.css?rel=1500117686780" type="text/css" media="all">
+            <link rel="stylesheet" href="{{network.templatePath}}/static/deploy/output.min.css?rel=1500117686780" type="text/css" media="all">
         {% else %}
-            <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/vendors.css" />
-            <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/default.css" media="screen" />
+            <link type="text/css" rel="stylesheet" href="{{network.templatePath}}/static/css/vendors.css" />
+            <link type="text/css" rel="stylesheet" href="{{network.templatePath}}/static/css/default.css" media="screen" />
         {% endif %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> 
         {{ this.head() }}
     </head>
 
     <!-- //End Global Header -->
-    <body class="body {{bodyClass}}">
+    <body class="{{bodyClass}}">
         {{ this.beginBody() }}
         <div class="mega-width">
-            {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
-            <main id="content" role="main">
-                {{ content | raw}}
-            </main>
-            {{ this.render('partials/_footer.twig', {network : networkData, blogData: blogData}) | raw }}
-            <div id="popup-overlay"></div>
-            {{this.render('partials/account-modal.twig',{network : networkData}) | raw }}
-            {{ this.render('partials/_javascript.twig', {networkData : networkData}) | raw }}
+            {{ this.render('partials/_header.twig', {network: network, blog: blog}) | raw }}
+            <div class="clearfix"></div>
+            
+            {{ content | raw}}
+            
+            <div class="clearfix"></div>
+            {{ this.render('partials/_footer.twig', {network : network, blog: blog}) | raw }}
+           
+            
         </div>
         {{ this.endBody() }}
+        {{ this.render('partials/_javascript.twig', {network : network}) | raw }}
     </body>
 </html>
 {{ this.endPage() }}
