@@ -1,10 +1,15 @@
+{% set blogs = _Blog.getAll() %}
+{% set network = _Network.getNetworkData() %}
 {% set templatePath = network.templatePath %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="search">
+<div class="search">
+    <div class="page__section-head text-center">
+        <h1>Search</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">        
                 <div class="search__heading">
-                    12 Search results for:
+                    0 Search results for:
                     <span class="search__query"> <i>abc</i></span>
                 </div>
                 <div class="search__error">
@@ -15,6 +20,25 @@
                     <p>Sorry, we couldnt find what you were looking for</p>
                     <a href="" class="button search__button button-grey button-radius">Back to Homepage</a>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% for blog in blogs %}
+                    {% set articles = _Article.getAll({"blogId": blog.id}) %}
+
+                    {% if articles | length > 0 %}
+                        <div class="card__view">
+                            <div class="row">
+                                {% for i in 1..4 %}
+                                    {% if articles[i] is defined %}
+                                        {{this.render('partials/_single-article.twig', {article: articles[i], 'position': i+1, containerClass: 'col-12 col-md-6 col-lg-3 styles__2'}) | raw}}            
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

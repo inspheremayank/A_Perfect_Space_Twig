@@ -1,0 +1,14 @@
+/* blog section
+================================ */
+.blog {
+    @include padding-bottom(50px);
+    .section__head {
+        @include padding-top(50px);
+        h1 {
+            @include font-size(30);
+        }
+    }
+    .tab__view { 
+        @include padding-bottom(30px);
+    }
+}

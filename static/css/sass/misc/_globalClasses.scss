@@ -78,6 +78,17 @@
          }
     }
 }
+.page__section-head {
+    background: $defaultbg none repeat scroll 0 0;
+    border: 2px solid darken($defaultbg, 8%);
+    border-left: none;
+    border-right: none;
+    h1 {
+        @include padding(30px 0);
+        @include font-size(45);
+        font-weight: $weightBold;
+    }
+}
 .channels {
     &__1 {
         background: $blue none repeat scroll 0 0;

@@ -165,6 +165,9 @@
                 }
             }
         }
+        &.no-bg {
+            background: none repeat scroll 0 0;
+        }
     }
     &__content {
         .highlighters {
