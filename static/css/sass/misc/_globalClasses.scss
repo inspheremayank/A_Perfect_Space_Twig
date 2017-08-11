@@ -3,6 +3,9 @@
 .upper { 
     text-transform: uppercase; 
 }
+.hide {
+    display: none;
+}
 .fullwidth { 
     width: $viewportSize !important;
 }

@@ -1,0 +1,24 @@
+{% if _AppHelper.getApplicationEnv() == 'PROD'%}
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/deploy/theme.min.js?rel=1500117686777"></script>
+{% else %}
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/plugins/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/plugins/jquery/js/jquery-migrate-1.2.1.min.js?ver=1.2.1"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/plugins/bootstrap-4.0.0-alpha/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/plugins/fancybox/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/plugins/owl-carousel/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/js/app.js"></script>
+
+    <!-- App scripts -->
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/_article-templates.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/home.js"></script>
+
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-articles.js"></script> 
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/auth.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/search.js"></script>
+
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/common.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/account-modal.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/user-profile.js"></script>
+    <script type="text/javascript" src="{{networkData.templatePath}}/static/development/js/login.js"></script>
+{% endif %}
+<script type="text/javascript" src="http://d31nhj1t453igc.cloudfront.net/sdk/sdk-v1.0.0.min.js"></script>

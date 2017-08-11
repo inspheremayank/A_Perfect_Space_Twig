@@ -5,10 +5,12 @@
     outline: none;
     background: none;
     cursor: pointer;
-    min-height: 36px;
+    @include padding(8px 20px);
+    display: inline-block;
     border: 1px solid $transparent;
     &-block {
         width: $viewportSize;
+        display: block;
     }
     &-rounded {
         @include border-radius(25px);
@@ -20,5 +22,8 @@
         background: $black none repeat scroll 0 0;
         color: $white;
         border-color: $black;
+        &:hover, &:focus {
+            background: lighten($black, 8%) none repeat scroll 0 0; 
+        }
     }
 }

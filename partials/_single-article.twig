@@ -1,0 +1,21 @@
+{% set networkData = _Network.getNetworkData() %}
+<div class="{{containerClass}}">
+    <div class="card__view-content channels__1">
+        <a href="{{article.url}}">
+            <div class="favorite">
+                <i class="fa fa-heart-o"></i>
+            </div>
+            <figure class="image-covered" style="background-image: url('dist/images/demo.png')"></figure>
+            {% set articleTitle = article.title| raw %}
+            {% if article.title|length > 50 %}
+                {% set articleTitle = article.title [:50] ~ '...' | raw %}
+            {% endif %}
+            <h3>{{articleTitle}}</h3>
+            {% set articleExcerpt = article.excerpt| raw %}
+            {% if article.excerpt|length > 70 %}
+                {% set articleExcerpt = article.excerpt[:70] ~ '...' | raw %}
+            {% endif %}
+            <p>{{ articleExcerpt }}</p>
+        </a>
+    </div>
+</div>

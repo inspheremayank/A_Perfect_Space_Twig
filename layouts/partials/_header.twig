@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="header__section d-flex align-items-center">
                     <div class="header__section-logo">
-                        {% set logo = network.templatePath~'/static/images/themeLogo.svg'%}
+                        {% set logo = network.templatePath~'/static/images/logo.png'%}
                         {% set logoUrl = network.networkLogoLinkUrl %}
                         {% if network.logoMedia | length > 0 %}
                             {% set logo = _Media.getMediaUrl(network.logoMedia, 177, 65, {'crop': 'limit'} )%}
@@ -50,7 +50,7 @@
                                     {% endif %}
                                 {% endfor %}
                                 {% if menuItems[5] is defined %}
-                                    <li class="more-menu">
+                                    <li class="dropdown more-menu">
                                         <a href="javscript:;">More <i class="fa fa-angle-down"></i></a>
                                         <ul class="sub-menu sub-menu-right">
                                             {% for i in 5..(menuItems |length - 1)%}
@@ -86,18 +86,33 @@
                                 <span class="item-2"></span>
                                 <span class="item-3"></span>
                             </div>
-                            <ul class="navigation__user-login d-none">
-                                <li><a href="javascript:;">Sign Up</a></li>
-                                <li><a href="javascript:;">Login</a></li>
-                            </ul>
-                            <div class="navigation__user-loginProfile">
-                                <div class="navigation__user-loginProfile-image image-covered rounded-circle" data-toggle="dropdown" style="background-image: url('dist/images/avtar.png');"></div>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                            
+                            {% if _User.isGuest() %}
+                                {% if not _Network.isNetworkClosed(network)%}
+                                    <ul class="navigation__user-login">
+                                        <li><a class="header__login__link header__login__link--signup sign-up__link" href="javascript:;">Sign Up</a></li>
+                                        <li><a class="header__login__link" href="javascript:;">Login</a></li>
+                                    </ul>
+                                {% endif %}
+                            {% else %}
+                                {% set profileImage = ''%}
+                                {% set profileImage = _Media.getMediaUrl(user.profileMedia, 80, 80, {radius: 'max', gravity: 'face', 'crop': 'thumb', 'type' : 'user'}) %}
+                                <div class="navigation__user-loginProfile">
+                                    <div class="navigation__user-loginProfile-image image-covered rounded-circle" data-toggle="dropdown" style="background-image: url('{{profileImage}}');"></div>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{{_AppHelper.buildUrl('user/my-news')}}">My News</a>
+                                        {% if not _Network.isNetworkClosed(network)%}
+                                            <a href="#" class="dropdown-item">Following</a>
+                                        {% endif %}
+                                        <a class="dropdown-item">Profile</a>
+                                        <a href="#" class="dropdown-item">My Account</a>
+                                        {% if _User.isAdminUser() %}
+                                            <a class="dropdown-item" href="http://{{network.defaultDomain['domain']}}/admin" target="_blank">Admin</a>
+                                        {% endif %}
+                                        <a class="dropdown-item sign-out" href="{{_AppHelper.getLogoffUrl()}}">Sign Out</a>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

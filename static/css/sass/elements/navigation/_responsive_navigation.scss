@@ -74,10 +74,20 @@
     ul {
         @include padding-top(80px);
         li {
-            border-bottom: 1px solid $border;
             a {
-                display: block;
+                display: flex;
                 @include padding(8px 15px);
+                justify-content: space-between;
+                i {
+                    display: flex;
+                    align-items: center;                    
+                }
+            }
+            .sub-menu {
+                display: none;
+            }
+            + li {
+                border-top: 1px solid $border;
             }
         }
     }

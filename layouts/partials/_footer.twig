@@ -1,0 +1,83 @@
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <div class="footer__content">
+                    <figure class="footer__content-logo">
+                        {% set footerLogo = network.templatePath~'/static/images/footer-logo.png' %}
+                        {% set footerLogoUrl = network.networkLogoLinkUrl %}
+                        {% if network.logoMedia | length > 0 %}
+                            {% set footerLogo = _Media.getMediaUrl(network.logoMedia, 177, 65, {'crop': 'limit'} )%}
+                        {% endif %}
+                        <a href="{{footerLogoUrl}}">
+                            <img src="{{footerLogo}}" class="img-fluid" alt="footer logo" />
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            {% set menuItems = blogData.blogHeaderMenu %}
+            {% for i in 0..1 %}
+                {% if menuItems[i] is defined %}
+                    {% set activeClass = (menuItems[i].link == _AppHelper.getServerUrl()) ? 'active' : ''%}
+                    {% set externalClass = (menuItems[i].isExternal) ? 'external-link' : '' %}
+                    {% set hasChildren = menuItems[i].children is defined and menuItems[i].children | length > 0 ? true : false %} 
+                    
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <div class="footer__content">
+                            <div class="footer__content-listing">
+                                {% if hasChildren %}
+                                    <h3>
+                                        <a href="javascript:;">
+                                            {{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}}
+                                        </a>
+                                    </h3>
+
+                                    <ul>
+                                        {% for childItem in menuItems[i].children%}
+                                            {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
+                                            {% set name = ((childItem.label is empty) ? ((childItem.pageTitle is empty)? childItem.blogTitle : childItem.pageTitle) : childItem.label) %}
+                                            <li>
+                                                <a href="{{childItem.link |raw}}" class="footer__navigation_more-link {{externalClass}}"  {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}>{{ name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                        <h3>
+                                            <a href="{{menuItems[i].link | raw}}">
+                                                {{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}}
+                                            </a>
+                                        </h3>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            {% set companyDetails = _Blog.getHomeBlogSettings() %}
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="footer__content">
+                    <div class="footer__content-listing">
+                        <h3>The Spaces</h3>
+                        <p>&copy; {{companyDetails.contact['name']}}</p>
+                        <p>{{companyDetails.contact['phone']}}</p>
+                        <p><a href="mailto:{{companyDetails.contact['email']}}">{{companyDetails.contact['email']}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+                <div class="footer__content">
+                    <div class="footer__content-listing social">
+                        <h3>We're Social</h3>
+                        <ul>
+                            <li><a href="{{companyDetails.social['facebook']}}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{companyDetails.social['instagram']}}"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="{{companyDetails.social['pinterest']}}"><i class="fa fa-pinterest-p"></i></a></li>
+                            <li><a href="{{companyDetails.social['twitter']}}"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

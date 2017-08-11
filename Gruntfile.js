@@ -40,6 +40,7 @@ module.exports = function(grunt) {
                         'static/plugins/html5.js',
                         'static/plugins/jquery-migrate-1.2.1.min.js',
                         'static/plugins/respond.min.js',
+                        'static/js/app.js',
                         'static/dev/js/_article-templates.js',
                         'static/dev/js/home.js',
                         'static/dev/js/user-articles.js',

@@ -7,9 +7,10 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{{this.title|raw}}</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>{{this.title | raw}}</title>
+        {{ Html.csrfMetaTags | raw }}
 
         <!-- Favicons and Device related Images
         ================================================== -->
@@ -31,15 +32,22 @@
             <link type="text/css" rel="stylesheet" href="{{networkData.templatePath}}/static/css/default.css" media="screen" />
         {% endif %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> 
+        {{ this.head() }}
     </head>
 
     <!-- //End Global Header -->
     <body class="body {{bodyClass}}">
         {{ this.beginBody() }}
-        
-        {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
-        
-        {{ this.render('partials/_footer.twig', {network : networkData, blogData: blogData}) | raw }}
+        <div class="mega-width">
+            {{ this.render('partials/_header.twig', {network: networkData, blogData: blogData}) | raw }}
+            <main id="content" role="main">
+                {{ content | raw}}
+            </main>
+            {{ this.render('partials/_footer.twig', {network : networkData, blogData: blogData}) | raw }}
+            <div id="popup-overlay"></div>
+            {{this.render('partials/account-modal.twig',{network : networkData}) | raw }}
+            {{ this.render('partials/_javascript.twig', {networkData : networkData}) | raw }}
+        </div>
         {{ this.endBody() }}
     </body>
 </html>

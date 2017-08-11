@@ -241,7 +241,11 @@
   -o-animation: #{$str};
   animation: #{$str};      
 }
-
+@mixin image_background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 
 
 @mixin font-size($sizeValue: 16, $line: $sizeValue * 1.5) {
