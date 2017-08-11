@@ -20,7 +20,7 @@
     }
     &-grey {
         background: $black none repeat scroll 0 0;
-        color: $white;
+        color: $white !important;
         border-color: $black;
         &:hover, &:focus {
             background: lighten($black, 8%) none repeat scroll 0 0; 

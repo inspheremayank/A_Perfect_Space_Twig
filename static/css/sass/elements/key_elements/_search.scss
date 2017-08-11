@@ -1,0 +1,31 @@
+/* search section
+================================ */
+
+.search {
+    &__heading {
+        margin: 25px 0;
+        @include font-size(30);
+        font-weight: $weightBold;
+    }
+    &__query {
+        font-weight: $weightRegular;
+        font-style: italic;
+    }
+    &__error {
+        text-align: center;
+        &-image {
+            height: 60px;
+            display: block;
+            img {
+                @include size(#{$viewportSize});
+            }
+        }
+        h3 {
+            @include font-size(60);
+            font-weight: $weightBold;
+        }
+        p {
+            @include font-size(20);
+        }
+    }
+}
