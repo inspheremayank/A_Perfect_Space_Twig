@@ -1,95 +1,44 @@
 {
     "module": {
         "event": {
-            "enabled": true
+            "enabled": false
         },
         "styling": {
             "enabled": false
         },
         "page": {
             "contentEditor": {
-                "enabled": false
+                "enabled": true
             }
         },
         "article": {
             "extendedAttributes": [
                 {
-                    "name": "meta_title",
-                    "label": "Article Author",
-                    "type": "inputbox"
-                },
-                 {
-                    "name": "meta_title1",
-                    "label": "Article Author",
-                    "type": "inputbox"
-                },
-                {
-                    "name": "authorLocation",
-                    "label": "select Author",
-                    "type": "dropdown",
-                    "options" : {
-                        "rajasthan" : "Rajasthan",
-                        "new delhi" : "New Delhi"
-                    }
-                },
-                {
-                    "name": "writerLocaton",
-                    "label": "select Writer",
-                    "type": "dropdown",
-                    "options" : {
-                        "panjab" : "Panjab",
-                        "hyderabad" : "Hyderabad"
-                    }
-                },
-                {
-                    "label" : "Select Region",
-                    "name": "stateList",
+                    "label" : "Type Of Property",
+                    "name": "type",
                     "type": "checkbox",
                     "options" : {
-                        "rajasthan" : "Rajasthan",
-                        "new delhi" : "New Delhi"
-                    }
-                },
-                {
-                    "label" : "Select District",
-                    "name": "districtList",
-                    "type": "checkbox",
-                    "options" : {
-                        "jhunjhunu" : "Jhunjhunu",
-                        "sikar" : "Sikar"
-                    }
-                },
-                {
-                    "label" : "Select File",
-                    "name": "attachment",
-                    "type": "file"
-                },
-                {
-                    "label" : "Select State Radio",
-                    "name": "stateRadio",
-                    "type": "radio",
-                    "options" : {
-                        "rajasthan" : "Rajasthan",
-                        "new delhi" : "New Delhi"
+                        "film" : "Film",
+                        "photography" : "Photography",
+                        "video" : "Video",
+                        "Events" : "Events",
+                        "productions" : "Productions"
                     }
                 },
                  {
-                    "label" : "Select District Radio",
-                    "name": "districtRadio",
-                    "type": "radio",
-                    "options" : {
-                        "jhunjhunu" : "Jhunjhunu",
-                        "sikar" : "Sikar"
-                    }
-                },
-                {
-                    "label" : "Description",
-                    "name": "message1",
+                    "name": "features",
+                    "label": "Key Features",
+                    "placeholder": "Add Multiple key Features by comma seprated",
                     "type": "textarea"
                 },
                 {
-                    "label" : "Description",
-                    "name": "message2",
+                    "label" : "Logistics",
+                    "name": "logistics",
+                    "type": "textarea"
+                },
+                {
+                    "label" : "Availability",
+                    "name": "availability",
                     "type": "textarea"
                 }
             ]
