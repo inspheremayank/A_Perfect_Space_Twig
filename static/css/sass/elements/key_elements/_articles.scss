@@ -23,6 +23,10 @@
                     @media #{$media-ipadSmall} {
                         height: 300px;
                     }
+                    img {
+                        @include size(#{$viewportSize});
+                        object-fit: cover;
+                    }
                 }
             }
             &.oneSlide {

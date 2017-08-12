@@ -16,10 +16,14 @@
                         {% if article.media | length > 4 %}
                             {% set index = 4 %}
                         {% endif%}
-                        <div class="article__slides-content {{sliderClass[index]}}">
+                        <div class="article__slides-content {{sliderClass[index]}}Slide">
                             <ul>
                                 {% for media in article.media %}
-                                    <li class="image-covered" data-fancybox="images" style="background-image: url('{{media.path}}');"></li>
+                                    <li>
+                                        <a href="{{media.path}}" data-fancybox="images">
+                                            <img src="{{media.path}}" alt="Image" />
+                                        </a>
+                                    </li>
                                     {% endfor %}
                             </ul>
                             <div class="article__slides-link">
