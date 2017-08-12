@@ -2,7 +2,6 @@
 ================================ */
 
 .search, .error {
-    @include padding-bottom(50px);
     &__heading {
         margin: 25px 0;
         @include font-size(30);

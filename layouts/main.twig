@@ -39,16 +39,19 @@
         <div class="mega-width">
             {{ this.render('partials/_header.twig', {network: network, blog: blog}) | raw }}
             <div class="clearfix"></div>
-            
+
             {{ content | raw}}
-            
+
             <div class="clearfix"></div>
             {{ this.render('partials/_footer.twig', {network : network, blog: blog}) | raw }}
-           
-            
+
+
         </div>
         {{ this.endBody() }}
+        <div id="popup-overlay"></div>
+        {{this.render('partials/account-modal.twig',{network : networkData}) | raw }}
         {{ this.render('partials/_javascript.twig', {network : network}) | raw }}
+
     </body>
 </html>
 {{ this.endPage() }}

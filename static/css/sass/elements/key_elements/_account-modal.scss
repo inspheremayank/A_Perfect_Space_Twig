@@ -48,8 +48,11 @@
             padding: 40px 28px;
         }
         &_logo {
-            height: 43px;
+            height: 35px;
             margin-bottom: 20px;
+            img {
+                height: $viewportSize; 
+            }
         }
         &_text {
             color: $white;
