@@ -13,16 +13,42 @@
                     height: inherit;
                 }
             }
+            .owl-nav {
+                margin-top: 0px;
+                & [class*="owl-"] {
+                    position: absolute;
+                    left: 0;
+                    bottom: 20px;
+                    background: none;
+                    cussor: pointer;
+                    @include size(50px);
+                    border: 2px solid $white;
+                    @include border-radius(50%);
+                    i {
+                        @include font-size(30);
+                        line-height: 39px;
+                    }
+                    &:hover,&:focus {
+                        background: none;
+                    }
+                }
+                .owl-next {
+                    right: 0;
+                    left: auto;
+                }
+            }
             .owl-dots {
                 position: absolute;
-                bottom: 25px;
-                width: $viewportSize;
+                bottom: 35px;
+                left: 50%;
+                @include translate(-50%, 0);
                 .owl-dot {
                     span {
                         background: $transparent;
                         border: 2px solid $white;
                         @include size(15px);
                         @include border-radius(50%);
+                        margin: 0 7px;
                     }
                     &.active, &:hover, &:focus {
                         span {

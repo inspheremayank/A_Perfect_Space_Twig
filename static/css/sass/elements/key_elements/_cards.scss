@@ -34,18 +34,18 @@
                 margin-bottom: 15px;
             }
             h3 {
-                max-height: 50px;
                 @include font-size(18);
                 font-weight: $weightBold;
                 text-transform: uppercase;
                 margin-bottom: 5px;
-                overflow: hidden;
+                /* max-height: 50px;
+                overflow: hidden; */
             }
             p {
-                max-height: 55px;
                 @include font-size(18);
                 font-weight: $weightLight;
-                overflow: hidden;
+                /* max-height: 55px;
+                overflow: hidden;*/
                 margin-bottom: 0px;
             }
             &.active {
