@@ -46,15 +46,16 @@
                                     <div class="highlighters">
                                         <div class="highlighters__section main">
                                             <div class="highlighters__head">
-                                                {{article.title}}
-                                                <span>in Keynton, Victoria</span>
+                                                {{article.title | raw}}
+                                                {% if additionalInfo.address is defined %}
+                                                <span>in {{additionalInfo.address}}</span>
+                                                {% endif %}
                                             </div>
                                             {% if additionalInfo.type is defined %}
                                                 {% set typeList = additionalInfo.type|split(',') %}
                                                 <div class="highlighters__content">
                                                     <div class="tab__view tab__rounded">
                                                         <ul>
-
                                                             {% if 'film' in typeList %}
                                                                 <li class="active channels__1">
                                                                     <a href="javascript:;">
@@ -105,7 +106,7 @@
                                                 About this space
                                             </div>
                                             <div class="highlighters__content">
-                                                {{ article.excerpt}} 
+                                                {{ article.content | raw}} 
                                             </div>
                                         </div>
                                         <div class="highlighters__section">
@@ -119,7 +120,7 @@
                                                         <ul class="listing">
                                                             {% for feature in featureList %}
                                                                 <li>{{feature}}</li>
-                                                                {% endfor%}
+                                                            {% endfor%}
                                                         </ul>
                                                     {% endif %}
                                                 {% endif %}
@@ -152,8 +153,9 @@
                                 <div class="article__form text-center">
                                     <div class="owner__info">
                                         <h3 class="owner__type">Space Owner</h3>
-                                        <img src="{{network.templatePath}}/static/images/demo2.png" alt="image" class="img-fluid rounded-circle owner__image" />
-                                        <h4 class="owner__name">Tom Spencer</h4>
+                                        {% set spaceOwnerImage = _Media.getMediaUrl(article.createdBy['media'], 80, 80, {radius: 'max', gravity: 'face', 'crop': 'thumb', 'type' : 'user'}) %}
+                                        <img src="{{spaceOwnerImage}}" alt="image" class="img-fluid rounded-circle owner__image" />
+                                        <h4 class="owner__name">{{article.createdBy['displayName']}}</h4>
                                     </div>
                                     <div class="owner__form">
                                         <h4>Get in touch with this owner.</h4>
@@ -161,12 +163,10 @@
                                             <label class="sr-only">Name*</label>
                                             <input class="form-control" type="text" placeholder="Name*" />
                                         </div>
-
                                         <div class="form-group">
                                             <label class="sr-only">Email*</label>
                                             <input class="form-control" type="email" placeholder="Email*" />
                                         </div>
-
                                         <div class="form-group">
                                             <label class="sr-only">Phone Number*</label>
                                             <input class="form-control" type="number" placeholder="Phone Number*" />

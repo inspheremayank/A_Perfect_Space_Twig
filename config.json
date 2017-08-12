@@ -14,18 +14,13 @@
         "article": {
             "extendedAttributes": [
                 {
-                    "label" : "Type Of Property",
-                    "name": "type",
-                    "type": "checkbox",
-                    "options" : {
-                        "film" : "Film",
-                        "photography" : "Photography",
-                        "video" : "Video",
-                        "Events" : "Events",
-                        "productions" : "Productions"
-                    }
+                    "label" : "Property Address",
+                    "name": "address",
+                    "type": "inputbox",
+                    "placeholder" : "Property Address",
+                    "required": true
                 },
-                 {
+                {
                     "name": "features",
                     "label": "Key Features",
                     "placeholder": "Add Multiple key Features by comma seprated",
@@ -40,7 +35,19 @@
                     "label" : "Availability",
                     "name": "availability",
                     "type": "textarea"
-                }
+                },
+                {
+                    "label" : "Property Types",
+                    "name": "type",
+                    "type": "checkbox",
+                    "options" : {
+                        "film" : "Film",
+                        "photography" : "Photography",
+                        "video" : "Video",
+                        "Events" : "Events",
+                        "productions" : "Productions"
+                    }
+                } 
             ]
         }
     }
