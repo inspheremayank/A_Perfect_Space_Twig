@@ -6,7 +6,10 @@
             //min-height: 375px;
             position: relative;
             margin-bottom: 25px;
+            display: flex;
+            height: $viewportSize;
             a {
+                width: $viewportSize;
                 display: block;
             }
             .favorite {
@@ -50,6 +53,9 @@
                     background: darken($defaultbg, 8%) none repeat scroll 0 0;
                 }
             }
+            &[class*=" channels__"] {
+                background: none;
+            }
         }
         .styles {
             .card__view-content {
@@ -75,11 +81,21 @@
                 figure {
                     @include border-radius(0px);
                 }
-            }
-            &__2 {
-                .card__view-content {
-                    &[class*=" channels__"] {
-                        background: none;
+                &.channels {
+                    &__1 {
+                        background: $blue none repeat scroll 0 0;
+                    }
+                    &__2 {
+                        background: $green none repeat scroll 0 0;
+                    }
+                    &__3 {
+                        background: $brown none repeat scroll 0 0;
+                    }
+                    &__4 {
+                        background: $grey none repeat scroll 0 0;
+                    }
+                    &__5 {
+                        background: $black none repeat scroll 0 0; 
                     }
                 }
             }
@@ -89,6 +105,13 @@
                 @include padding-top(30px);
                 figure {
                     display: none;
+                }
+                &.active {
+                    .favorite {
+                        i {
+                            color: $white;
+                        }
+                    }
                 }
                 .favorite {
                     i {
