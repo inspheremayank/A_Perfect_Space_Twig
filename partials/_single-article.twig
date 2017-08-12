@@ -1,13 +1,29 @@
 {% set network = _Network.getNetworkData() %}
-<div class='col-12 col-md-6 col-lg-3'>
+{% set bgImg = '' %}
+{% set articleImg = '' %}
+{% set cardImageClass = 'no-image' %}
+{% if article.featuredMedia | length > 0 and article.featuredMedia['id'] is not empty %}
+    {% set cardImageClass = '' %}
+    {% set articleImg = _Media.getMediaUrl(article.featuredMedia,imgWidth, imgHeight, {'crop': 'thumb', 'gravity': gravity} ) %}
+    {% set bgImg = "background-image: url('"~articleImg~"');" %}
+{% endif %}
+<div class="{{class}}">
     <div class="card__view-content channels__1">
-        <a href="javascript:void(0)">
+        <a href="{{article.url}}">
             <div class="favorite">
                 <i class="fa fa-heart-o"></i>
             </div>
-            <figure class="image-covered" style="background-image: url('{{network.templatePath}}/static/images/demo.png')"></figure>
-            <h3>Hunter's Place</h3>
-            <p>Australia's 567 Miles</p>
+            <figure class="image-covered" style="{{bgImg}}"></figure>
+                {% set articleTitle = article.title| raw %}
+                {% if article.title|length > 80 %}
+                    {% set articleTitle = article.title [:50] ~ '...' | raw %}
+                {% endif %}
+            <h3>{{articleTitle}}</h3>
+            {% set articleExcerpt = article.excerpt| raw %}
+            {% if article.excerpt|length > 150 %}
+                {% set articleExcerpt = article.excerpt[:100] ~ '...' | raw %}
+            {% endif %}
+            <p>{{articleExcerpt}}</p>
         </a>
     </div>
 </div>

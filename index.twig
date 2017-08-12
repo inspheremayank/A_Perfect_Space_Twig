@@ -1,5 +1,5 @@
 {{ set(this, 'title', _Blog.getBlogTitle()) }}
-{% set blogs = _Blog.getAll({"urlPrefix" : {0:'cricket', 1:'degitalws'}}) %}
+{% set blogs = _Blog.getAll({"urlPrefix" : {0:'www', 1:'basketball'}}) %}
 {% set network = _Network.getNetworkData() %}
 
 <!-- Begin Banner section -->
@@ -95,13 +95,12 @@
                 <div class="row">
                     <div class="col-12">
                         {% for blog in blogs %}
-
                             {% set blogFeed = _Blog.getBlogFeed({'blogGuid': blog.guid}) %}  
                             {% if blogFeed.articles | length > 0 %}
                                 <div class="card__view">
                                     <div class="section__head d-flex no-lineHeight">
                                         <h2 class="fullwidth">{{blog.title}}</h2>
-                                        <span class="d-flex fullwidth justify-content-end align-self-end section__head-rightAlign"><a href="javascript:;">See all</a></span>
+                                        <span class="d-flex fullwidth justify-content-end align-self-end section__head-rightAlign"><a href="{{blog.url}}">See all</a></span>
                                     </div>
                                     <div class="row">
                                         {% set j = 0 %}
