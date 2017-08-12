@@ -1,6 +1,13 @@
-{% set blogs = _Blog.getAll() %}
+{{ set(this, 'title', 'Search - ' ~ search) }}
+
 {% set network = _Network.getNetworkData() %}
-{% set templatePath = network.templatePath %}
+{{this.registerJs("SearchController.listing();")}}
+
+{{ set(this, 'params', {search: true})  }}
+
+{% set limit = 20 %}
+{% set articles = _Search.searchArticles({'limit': limit, 'offset': 0, 'search': search}) %}
+{% set homeUrl = network.networkLogoLinkUrl %}
 <div class="search">
     <div class="page__section-head text-center">
         <h1>Search</h1>
@@ -9,37 +16,40 @@
         <div class="row">
             <div class="col-12">        
                 <div class="search__heading">
-                    0 Search results for:
-                    <span class="search__query"> <i>abc</i></span>
+                    {{ articles|length }} Search results for:
+                    <span class="search__query"> <i>{{search}}</i></span>
                 </div>
-                <div class="search__error">
-                    <span class="search__error-image">
-                        <img src="{{templatePath}}/static/images/icons/error.svg" alt="Error" />
-                    </span>
-                    <h3 class="head">404</h3>
-                    <p>Sorry, we couldnt find what you were looking for</p>
-                    <a href="" class="button search__button button-grey button-radius">Back to Homepage</a>
-                </div>
+                {% if articles|length <= 0%}
+                    <div class="search__error">
+                        <span class="search__error-image">
+                            <img src="{{network.templatePath}}/static/images/icons/error.svg" alt="Error" />
+                        </span>
+                        <h3 class="head">404</h3>
+                        <p>Sorry, we couldn't find what you were looking for</p>
+                        <a href="{{homeUrl}}" class="button search__button button-grey button-radius">Back to Homepage</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                {% for blog in blogs %}
-                    {% set articles = _Article.getAll({"blogId": blog.id}) %}
-
-                    {% if articles | length > 0 %}
-                        <div class="card__view">
-                            <div class="row">
-                                {% for i in 1..4 %}
-                                    {% if articles[i] is defined %}
-                                        {{this.render('partials/_single-article.twig', {article: articles[i], 'position': i+1, containerClass: 'col-12 col-md-6 col-lg-3 styles__2'}) | raw}}            
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+        {% if articles|length %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card__view">
+                        <div class="row">
+                            {% for article in articles %}
+                                {{this.render('partials/_single-article.twig', {article: article, 'position': i+1,  class: 'col-12 col-md-6 col-lg-3'}) | raw}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Start Pagination block -->
+                    {% if articles|length >= limit %}
+                        <div class="text-center">
+                            <button class="button button-xs loadMoreArticles"> <i class="fa fa-arrow-down"></i> Load More</button>
                         </div>
                     {% endif %}
-                {% endfor %}
+                    <!-- End Pagination Block -->
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </div>

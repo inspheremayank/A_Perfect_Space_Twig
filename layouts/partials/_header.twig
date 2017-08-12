@@ -44,9 +44,18 @@
                                 {% set profileImage = ''%}
                                 {% set profileImage = _Media.getMediaUrl(user.profileMedia, 80, 80, {radius: 'max', gravity: 'face', 'crop': 'thumb', 'type' : 'user'}) %}
                                 <div class="navigation__user-loginProfile">
-                                    <div class="navigation__user-loginProfile-image image-covered rounded-circle" data-toggle="dropdown" style="background-image: url('dist/images/avtar.png');"></div>
+                                    <div class="navigation__user-loginProfile-image image-covered rounded-circle" data-toggle="dropdown" style="background-image: url('{{profileImage}}');"></div>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{{_AppHelper.getLogoffUrl()}}">Something else here</a>
+                                        <a class="dropdown-item" href="{{_AppHelper.buildUrl('user/my-news')}}">My News</a>
+                                        {% if not _Network.isNetworkClosed(network)%}
+                                            <a href="javascript:void(0)" class="dropdown-item account-modal-link link--following">Following</a>
+                                        {% endif %}
+                                        <a href="javascript:void(0)" class="dropdown-item account-modal-link link--profile">Profile</a>
+                                        <a href="javascript:void(0)" class="dropdown-item account-modal-link link--account">My Account</a>
+                                        {% if _User.isAdminUser() %}
+                                            <a class="dropdown-item" href="http://{{network.defaultDomain['domain']}}/admin" target="_blank">Admin</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{{_AppHelper.getLogoffUrl()}}">Sign Out</a>
                                     </div>
                                 </div>
                             {% endif %}

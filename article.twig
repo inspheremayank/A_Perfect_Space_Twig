@@ -15,12 +15,9 @@
                             {% if article.media | length > 4 %}
                                 {% set index = 4 %}
                             {% endif%}
-                            <div class="article__slides-content {{sliderClass.index}}Slide">
+                            <div class="article__slides-content {{sliderClass[index]}}Slide">
                                 <ul>
                                     {% for media in article.media %}
-                                        <li class="image-covered" style="background-image: url('{{media.path}}');"></li>
-                                        <li class="image-covered" style="background-image: url('{{media.path}}');"></li>
-                                        <li class="image-covered" style="background-image: url('{{media.path}}');"></li>
                                         <li class="image-covered" style="background-image: url('{{media.path}}');"></li>
                                     {% endfor %}
                                     </ul>

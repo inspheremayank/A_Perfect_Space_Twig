@@ -24,21 +24,23 @@
             </div>
             <div class="col-12 col-md-6 px-0">
                 <div class="banner__section-content">
-                    <div class="top-section">
-                        <h3>Book or list a perfect space</h3>
-                        <div class="search-section">
-                            <div class="input-group">
-                                <label>Find your perfect space</label>
-                                <input type="text" />
-                                <button type="submit"><i class="fa fa-search"></i></button>
+                    <form action="{{ url('search') }}">
+                        <div class="top-section">
+                            <h3>Book or list a perfect space</h3>
+                            <div class="search-section">
+                                <div class="input-group">
+                                    <label>Find your perfect space</label>
+                                    <input name="s" autocomplete="off" />
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="bottom-section">
                         <div class="bottom-section-content">
                             <h3>The digital location scout for planet earth.</h3>
                             <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            <a class="button" href="javascript:;">Sign Up</a>
+                            <a class="button header__login__link--signup sign-up__link" href="javascript:;">Sign Up</a>
                         </div>
                     </div>
                 </div>
