@@ -7,7 +7,7 @@
     {% set articleImg = _Media.getMediaUrl(article.featuredMedia,imgWidth, imgHeight, {'crop': 'thumb', 'gravity': gravity} ) %}
     {% set bgImg = "background-image: url('"~articleImg~"');" %}
 {% endif %}
-<div class="{{class}}">
+<div class="{{class}} {{cardImageClass}}">
     <div class="card__view-content channels__1">
         <a href="{{article.url}}">
             <div class="favorite">
