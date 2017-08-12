@@ -25,7 +25,7 @@
                     }
                 }
             }
-            &.singleSlide {
+            &.oneSlide {
                 ul li {
                     &:first-child {
                         margin-right: 0px;
@@ -33,7 +33,7 @@
                     }
                 }
             }
-            &.dualSlide {
+            &.twoSlide {
                 ul li {
                     width: calc(#{$viewportSize} / 2);
                     &:nth-child(2) {
@@ -47,7 +47,7 @@
                     }
                 }
             } 
-            &.fourSlide, &.multiSlide {
+            &.fourSlide, &.threeSlide {
                 ul li {
                     width: calc(#{$viewportSize} / 2);
                     &:nth-child(2) {
@@ -90,7 +90,7 @@
 
                 }
             }
-            &.multiSlide {
+            &.threeSlide {
                 ul li { 
                     &:nth-child(3) {  
                         margin-right: 0px !important;
@@ -195,6 +195,7 @@
             }
             &__head {
                 width: 30%;
+                @include padding-right(15px);
                 @media #{$media-ipadPortrait} {
                     width: $viewportSize;
                     margin-bottom: 15px;
@@ -207,6 +208,9 @@
                 }
                 font-weight: $weightLight;
                 @include padding-right(20px);
+                .tab__view li a {
+                    cursor: default;
+                }
                 .listing {
                     overflow: hidden;
                     li {
