@@ -5,6 +5,7 @@
 
 {% set additionalInfo = article.additionalInfo %}
 {% set network = _Network.getNetworkData() %}
+{{this.registerJs("HomeController.article();")}}
 <!-- Begin Article section -->
 <div class="article__wrapper">
     {% if article.media | length > 0 %}
@@ -17,17 +18,17 @@
                             {% set index = 4 %}
                         {% endif%}
                         <div class="article__slides-content {{sliderClass[index]}}Slide">
-                            <ul>
+                            <ul id="articleImages">
                                 {% for media in article.media %}
                                     <li>
-                                        <a href="{{media.path}}" data-fancybox="images">
+                                        <a href="javascript:void(0)">
                                             <img src="{{media.path}}" alt="Image" />
                                         </a>
                                     </li>
                                     {% endfor %}
                             </ul>
                             <div class="article__slides-link">
-                                <a href="javascript:;">See all {{article.media | length}} Photos</a>
+                                <a href="javascript:;" class="imageModal">See all {{article.media | length}} Photos</a>
                             </div>
                         </div>
                     </div>
