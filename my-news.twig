@@ -1,0 +1,47 @@
+{{ set(this, 'title', _Blog.getBlogTitle()) }}
+{% set blogs = _Blog.getAll({"urlPrefix" : {0:'www', 1:'basketball'}}) %}
+{% set network = _Network.getNetworkData() %}
+<div class="userProfile">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-4 px-0">
+                <div class="userProfile__info m-auto text-center">
+                    <div class="userProfile__info-image image-covered m-auto" style="background-image: url('{{network.templatePath}}/static/images/demo2.png')"></div>
+                    <div class="userProfile__info-name">Mayank Mehendiratta</div>
+                    <button class="userProfile__info-follow button button-grey button-radius">Follow</button>
+                    <div class="userProfile__info-description">Lipsum</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 px-0">
+                <div class="userProfile__activity">
+                    <div class="userProfile__activity-title">
+                        <div class="col-12">
+                            {% for blog in blogs %}
+                                {% set blogFeed = _Blog.getBlogFeed({'blogGuid': blog.guid}) %}  
+                                {% if blogFeed.articles | length > 0 %}
+                                    <div class="card__view">
+                                        <div class="section__head d-flex no-lineHeight">
+                                            <h2 class="fullwidth">{{blog.title}}</h2>
+                                        </div>
+                                        <div class="row">
+                                            {% set j = 0 %}
+                                            {% for i in 1..(blogFeed.articles|length - 1) %}
+                                                {% if blogFeed.articles[i] is defined  and j < 4 %}
+                                                    {% if blogFeed.articles[i].articleId is defined %}
+                                                        {{this.render('partials/_single-article.twig', {article: blogFeed.articles[i], 'position': i+1, class: 'col-12 col-md-6'}) | raw}}            
+                                                        {% set j = j+1 %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
