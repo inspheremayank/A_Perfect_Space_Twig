@@ -9,13 +9,9 @@ var HomeController = (function ($) {
 HomeController.Article = (function ($) {
 
     var attachEvents = function () {
-        var fancyGallery = $("#articleImages").find("a");
-        fancyGallery.attr("rel","gallery").fancybox({
-            type: "image"
-        });
-        $('.imageModal').on('click', function() {
-            fancyGallery.eq(0).click(); 
-        });
+       $('.imageModal').on('click', function(){
+          $('#articleImages').find('a').eq(0).click(); 
+       });
     };
 
     return {

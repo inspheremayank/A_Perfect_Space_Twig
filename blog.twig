@@ -1,30 +1,20 @@
 {{ set(this, 'title', _Blog.getBlogTitle()) }}
-{% set blogs = _Blog.getAll() %}
+
 {% set network = _Network.getNetworkData() %}
 
-{% set blogInfo = _Blog.get() %}
+
 {% set network = _Network.getNetworkData() %}
 
-{{ set(this, 'title', blogInfo.title) }}
 
-{% set limit = 12 %}
+{% set limit = 20 %}
 {% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
 {% set articles = articlesArr.articles %}
 
-{% set hasBlogImage = FALSE %}
-{% set blogImage = "" %}
-{% if blogInfo.media['cover']['id'] is not empty %}
-    {% set blogImage = _Media.getMediaUrl(blogInfo.media['cover'], 1160, 600, {crop:"fill"}) %}
-    {% set hasBlogImage = TRUE %}
-{% endif %}    
-
-{% set blogOwnerImage = _Media.getMediaUrl(blogInfo.owner['media'], 180, 180, {crop:"thumb", radius:"max", gravity:"face", type: "user"}) %}
 {{this.registerJs("HomeController.listing();")}}
 {{this.registerJs("HomeController.blog();")}}
-
 <div class="blog">
     <div class="page__section-head text-center">
-        <h1>Section 1</h1>
+        <h1>{{_Blog.getBlogTitle() | capitalize}}</h1>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -91,6 +81,11 @@
                                 {% endfor %}
                             </div>
                         </div>
+                    </div>
+                {% endif %}
+                {% if articles|length >= limit %}
+                    <div class="text-center">
+                        <a href="javascript:void(0)" class="button button-grey loadMoreArticles"><i class="fa fa-arrow-down"></i>&nbsp;Load More</a>
                     </div>
                 {% endif %}
             </div>

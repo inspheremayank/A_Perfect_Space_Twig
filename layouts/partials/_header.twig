@@ -20,9 +20,13 @@
                     <div class="header__section-navigation d-flex justify-content-end">
                         <div class="navigation__main d-flex align-items-center">
                             <ul>
-                                <li><a href="javascript:;">List A Space</a></li>
+                                {% if not _User.isGuest()%}
+                                <li><a href="/admin/article/create">List A Space</a></li>
+                                {% endif %}
                                 <li><a href="javascript:;">Find A Space</a></li>
-                                <li><a href="javascript:;">Your Spaces</a></li>
+                                {% if not _User.isGuest()%}
+                                <li><a href="/admin/article-manager/index">Your Spaces</a></li>
+                                {% endif %}
                                 <li><a href="javascript:;">Contact</a></li>
                             </ul>
                         </div>

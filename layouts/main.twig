@@ -47,11 +47,11 @@
 
 
         </div>
-        {{ this.endBody() }}
+
         <div id="popup-overlay"></div>
         {{this.render('partials/account-modal.twig',{network : networkData}) | raw }}
         {{ this.render('partials/_javascript.twig', {network : network}) | raw }}
-
+        {{ this.endBody() }}
     </body>
 </html>
 {{ this.endPage() }}

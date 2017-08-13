@@ -2,7 +2,7 @@
 
 {% set network = _Network.getNetworkData() %}
 
-{% set limit = 12 %}
+{% set limit = 20 %}
 {% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
 {% set articles = articlesArr.articles %}
 
@@ -11,7 +11,7 @@
 
 <div class="blog">
     <div class="page__section-head text-center">
-        <h1>{{_Blog.getBlogTitle()}}</h1>
+        <h1>{{_Blog.getBlogTitle() | capitalize}}</h1>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -66,6 +66,12 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
+                    </div>
+                {% endif %}
+                
+                {% if articles|length >= limit %}
+                    <div class="text-center">
+                        <a href="javascript:void(0)" class="button button-grey loadMoreArticles"><i class="fa fa-arrow-down"></i>&nbsp;Load More</a>
                     </div>
                 {% endif %}
             </div>
