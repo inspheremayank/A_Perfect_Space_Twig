@@ -1,3 +1,6 @@
+{% set details = _Blog.getHomeBlogSettings() %}
+
+{{_AppHelper.printArray(companyDetails)}}
 <footer class="footer">
     <div class="container-fluid">
         <div class="row">
@@ -15,53 +18,51 @@
                     </figure>
                 </div>
             </div>
-            {% set menuItems = blogData.blogHeaderMenu %}
-            {% for i in 0..1 %}
-                {% if menuItems[i] is defined %}
-                    {% set activeClass = (menuItems[i].link == _AppHelper.getServerUrl()) ? 'active' : ''%}
-                    {% set externalClass = (menuItems[i].isExternal) ? 'external-link' : '' %}
-                    {% set hasChildren = menuItems[i].children is defined and menuItems[i].children | length > 0 ? true : false %} 
-                    
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <div class="footer__content">
-                            <div class="footer__content-listing">
-                                {% if hasChildren %}
-                                    <h3>
-                                        <a href="javascript:;">
-                                            {{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}}
-                                        </a>
-                                    </h3>
-
-                                    <ul>
-                                        {% for childItem in menuItems[i].children%}
-                                            {% set externalClass = (childItem.isExternal) ? 'external-link' : '' %}
-                                            {% set name = ((childItem.label is empty) ? ((childItem.pageTitle is empty)? childItem.blogTitle : childItem.pageTitle) : childItem.label) %}
-                                            <li>
-                                                <a href="{{childItem.link |raw}}" class="footer__navigation_more-link {{externalClass}}"  {% if childItem.target != "" %}target="{{childItem.target}}"{% endif %}>{{ name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% else %}
-                                        <h3>
-                                            <a href="{{menuItems[i].link | raw}}">
-                                                {{ ((menuItems[i].label is empty) ? ((menuItems[i].pageTitle is empty)? menuItems[i].blogTitle : menuItems[i].pageTitle) : menuItems[i].label )}}
-                                            </a>
-                                        </h3>
+           
+            <div class="col-12 col-md-4 col-lg-2">
+                <div class="footer__content">
+                    <div class="footer__content-listing">
+                        <h3><a href="javascript:;">About Us</a></h3>
+                        <ul>
+                            {% set menuItems = blogData.blogFooterMenu %}
+                            {% for i in 0..(menuItems|length -1) %}
+                                {% if menuItems[i] is defined %}
+                                    {% set menuItem = menuItems[i] %}
+                                    <li>
+                                        <a class="footer__additional-link" href="{{menuItem.link}}">{{ ((menuItem.label is empty) ? ((menuItem.pageTitle is empty)? menuItem.blogTitle : menuItem.pageTitle) : menuItem.label )}}</a>
+                                    </li>
                                 {% endif %}
-                            </div>
-                        </div>
+                            {% endfor %}   
+                        </ul>
                     </div>
-                {% endif %}
-            {% endfor %}
-            
-            {% set companyDetails = _Blog.getHomeBlogSettings() %}
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-2">
+                <div class="footer__content">
+                    <div class="footer__content-listing">
+                        <h3>The Spaces</h3>
+                        <ul>
+                            {% if not _User.isGuest()%}
+                                <li><a href="/admin/article/create">List A Space</a></li>
+                            {% endif %}
+                                <li><a href="javascript:;">Find A Space</a></li>
+                            {% if not _User.isGuest()%}
+                                <li><a href="/user/my-news">Your Spaces</a></li>
+                            {% endif %}
+                            <li><a href="javascript:;">Contact</a></li>
+                            <li><a class="header__login__link header__login__link--signup sign-up__link" href="javascript:;">Sign Up</a></li>
+                            <li><a class="header__login__link" href="javascript:;">Login</a></li>      
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="col-12 col-md-4 col-lg-3">
                 <div class="footer__content">
                     <div class="footer__content-listing">
                         <h3>The Spaces</h3>
-                        <p>&copy; {{companyDetails.contact['name']}}</p>
-                        <p>{{companyDetails.contact['phone']}}</p>
-                        <p><a href="mailto:{{companyDetails.contact['email']}}">{{companyDetails.contact['email']}}</a></p>
+                        <p>&copy; {{details.contact['name']}}</p>
+                        <p>{{details.contact['phone']}}</p>
+                        <p><a href="mailto:{{details.contact['email']}}">{{details.contact['email']}}</a></p>
                     </div>
                 </div>
             </div>
@@ -70,10 +71,18 @@
                     <div class="footer__content-listing social">
                         <h3>We're Social</h3>
                         <ul>
-                            <li><a href="{{companyDetails.social['facebook']}}"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="{{companyDetails.social['instagram']}}"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="{{companyDetails.social['pinterest']}}"><i class="fa fa-pinterest-p"></i></a></li>
-                            <li><a href="{{companyDetails.social['twitter']}}"><i class="fa fa-twitter"></i></a></li>
+                            {% if details.social['facebook'] is not empty %}
+                                <li><a href="{{details.social['facebook']}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            {% endif %}
+                            {% if details.social['instagram'] is not empty %}
+                                <li><a href="{{details.social['instagram']}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            {% endif %}
+                            {% if details.social['pinterest'] is not empty %}
+                                <li><a href="{{details.social['pinterest']}}" target="_blank"><i class="fa fa-pinterest-p"></i></a></li>
+                            {% endif %}
+                            {% if details.social['twitter'] is not empty %}
+                                <li><a href="{{details.social['twitter']}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
