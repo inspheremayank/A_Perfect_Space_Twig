@@ -1,5 +1,6 @@
 {{ set(this, 'title', _Blog.getBlogTitle()) }}
-{% set blogs = _Blog.getAll({"urlPrefix" : {0:'www', 1:'basketball'}}) %}
+{% set blogs = _Blog.getAll({"urlPrefix" : {0: 'private', 1:'public', 2: 'commercial'}}) %}
+
 {% set network = _Network.getNetworkData() %}
 <!-- Begin Banner section -->
 <div class="banner__section">
@@ -64,7 +65,7 @@
                                 <span class="d-flex fullwidth justify-content-end align-self-end section__head-rightAlign"><a href="{{blog.url}}">See all</a></span>
                             </div>
                             <div class="row">
-                                {% for i in 1..4 %}
+                                {% for i in 0..3 %}
                                     {% if blogFeed.articles[i].articleId is defined %}
                                         {{this.render('partials/_single-article.twig', {article: blogFeed.articles[i], 'position': i+1, class: 'col-12 col-md-6 col-lg-3'}) | raw}}            
                                     {% endif %}

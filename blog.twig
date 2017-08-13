@@ -2,84 +2,27 @@
 
 {% set network = _Network.getNetworkData() %}
 
-
-{% set network = _Network.getNetworkData() %}
-
-
 {% set limit = 20 %}
 {% set articlesArr = _Blog.getBlogFeed({'limit': limit, 'offset': 0}) %}
 {% set articles = articlesArr.articles %}
 
 {{this.registerJs("HomeController.listing();")}}
-{{this.registerJs("HomeController.blog();")}}
 <div class="blog">
     <div class="page__section-head text-center">
         <h1>{{_Blog.getBlogTitle() | capitalize}}</h1>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="section__head d-flex justify-content-center">
-                    <h1>Find A Perfect Space</h1>
-                </div>
-                <div class="tab__view tab__rounded text-center">
-                    <ul>
-                        <li class="active channels__1">
-                            <a href="javascript:;">
-                                <span><i class="fa fa-video-camera"></i></span>
-                                Film
-                            </a>
-                        </li>
-                        <li class="channels__2">
-                            <a href="javascript:;">
-                                <span><i class="fa fa-camera"></i></span>
-                                Photography
-                            </a>
-                        </li>
-                        <li class="channels__3">
-                            <a href="javascript:;">
-                                <span><i class="fa fa-camera"></i></span>
-                                Video
-                            </a>
-                        </li>
-                        <li class="channels__4">
-                            <a href="javascript:;">
-                                <span><i class="fa fa-camera"></i></span>
-                                Events
-                            </a>
-                        </li>
-                        <li class="channels__5">
-                            <a href="javascript:;">
-                                <span><i class="fa fa-camera"></i></span>
-                                Productions
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {{this.render("partials/_find-perfect-space.twig") | raw}}
         <div class="row">
             <div class="col-12">
                 {% if articles|length > 0 %}
                     <div class="card__view">
-                        <div class="row">
+                        <div class="row ajaxArticles" data-existing-nonpinned-count="{{articlesArr.existingNonPinnedCount}}" data-offset="{{limit}}">
                             {% for i in 0..(articles|length - 1) %}
                                 {% if articles[i] is defined %}
                                     {{this.render('partials/_single-article.twig', {article: articles[i], 'position': (i+1), class: 'col-12 col-md-6 col-lg-3'}) | raw}}
                                 {% endif %}
                             {% endfor %}
-                {% for blog in blogs %}
-                    {% set articles = _Article.getAll({"blogId": blog.id}) %}
-
-                    {% if articles | length > 0 %}
-                        <div class="card__view">
-                            <div class="row">
-                                {% for i in 1..4 %}
-                                    {% if articles[i] is defined %}
-                                        {{this.render('partials/_single-article.twig', {article: articles[i], 'position': i+1, class: 'col-12 col-md-6 col-lg-3 styles__2'}) | raw}}            
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
                         </div>
                     </div>
                 {% endif %}
